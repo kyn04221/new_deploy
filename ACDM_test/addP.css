@@ -1,0 +1,175 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.header {
+    background-color: white;
+    color: rgb(6, 6, 138);
+    padding: 20px;
+    text-align: center;
+    display: flex; 
+    justify-content: center;
+    border-bottom: 2px solid #ccc;
+}
+
+h1 {
+    margin-top: 32px;
+}
+
+.header img {
+    width: 130px;
+    border-radius: 5px;
+    height: 100px;
+}
+
+.container {
+    display: flex;
+    height: 100%;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-right: 2px solid #ccc;
+}
+
+.sidebar h2 {
+    margin-top: 0;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.sidebar ul li a:hover {
+    color: #4a90e2;
+}
+
+.main {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.main > div {
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    width: 100%; /* 전체 폭을 사용 */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-row {
+    display: flex;
+    justify-content: space-between; /* 공간을 균등하게 분배 */
+}
+
+.input-row input[type="text"] {
+    flex: 1; /* 입력 칸이 균등하게 분배되도록 설정 */
+    margin-right: 10px; /* 오른쪽 여백 추가 */
+}
+
+.input-row input[type="text"]:last-child {
+    margin-right: 0; /* 마지막 입력 칸 오른쪽 여백 제거 */
+}
+
+.file-inputs {
+    margin-top: 15px; /* 다음 줄로 가는 여백 */
+}
+
+input[type="file"] {
+    width: calc(100% - 10px); /* 전체 폭에서 여백을 뺀 값 */
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    background-color: rgb(6, 6, 138);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4a90e2; /* 버튼 호버 색상 */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.container {
+    display: flex; /* 가로로 나란히 정렬 */
+    margin-bottom: 20px; /* 상단 여백 추가 */
+}
+
+.one {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex; 
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+/* 모든 입력 필드의 스타일 */
+input[type="text"] {
+    
+    height: 8px; 
+    padding: 8px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+}
+input[type="file"]{
+    width: 300px;
+      display: flex;
+    flex-direction: column; /* 수직 방향으로 설정 */
+    justify-content: flex-start;
+    
+}

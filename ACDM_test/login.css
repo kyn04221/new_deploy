@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: white; /* 흰색 헤더 */
+    color: rgb(6, 6, 138); /* 어두운 텍스트 */
+    padding: 20px;
+    text-align: center;
+    display: flex; 
+    justify-content: center;
+
+
+
+}
+
+.rogo{
+    margin-top: 40px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.header img {
+    width: 130px; /* 썸네일 이미지 크기 */
+    border-radius: 5px; /* 둥근 모서리 */
+    height: 100px; /* 이미지 높이 */
+}
+
+.container {
+    width: 300px;
+    margin: 100px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+h2 {
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input {
+    width: 90%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: rgb(6, 6, 138);
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #218838;
+}
+
+p {
+    text-align: center;
+}

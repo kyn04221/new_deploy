@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="addP.css">
+    <title>인력 추가</title>
+</head>
+
+<body>
+    <header class="header">
+        <img src="img/성강로고.jpg" alt="Thumbnail">
+        <h1><a href="main.html">(주)성강개발</a></h1>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h2>성강개발 부산역점</h2>
+            <nav>
+                <ul>
+                    <li><a href="main.html">출력 관리</a></li>
+                    <li><a href="addP.html">인력 관리</a></li>
+                    <li><a href="">거래처 관리</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main">
+            <h2>인력 추가</h2>
+            <div>
+                <div class="one">
+                    <label for="name">이름:</label>
+                    <input type="text" id="name">
+
+                    <label for="contact">연락처:</label>
+                    <input type="text" id="contact">
+
+                    <label for="address">주소:</label>
+                    <input type="text" id="address">
+
+
+                </div>
+
+                <div class="two">
+                    <label for="idPhoto">주민등록증 사진:</label>
+                    <input type="file" id="idPhoto" accept="image/*">
+    
+                    <label for="safetyCertPhoto">안전교육 이수증 사진:</label>
+                    <input type="file" id="safetyCertPhoto" accept="image/*">
+    
+                    <label for="signaturePhoto">싸인 사진 :</label>
+                    <input type="file" id="signaturePhoto" accept="image/*">
+    
+
+                </div>
+
+
+                <button id="saveButton" onclick="savePersonnel()">저장</button>
+            </div>
+
+            <h2>저장된 인력 목록</h2>
+            <table id="personnelTable">
+                <thead>
+                    <tr>
+                        <th>이름</th>
+                        <th>연락처</th>
+                        <th>주소</th>
+                        <th>주민등록증 사진</th>
+                        <th>안전교육 이수증 사진</th>
+                        <th>싸인 사진</th>
+                    </tr>
+                </thead>
+                <tbody id="personnelList">
+                    <!-- 저장된 인력 정보가 여기에 추가됩니다 -->
+                </tbody>
+            </table>
+        </main>
+    </div>
+
+    <script>
+        function savePersonnel() {
+            const name = document.getElementById("name").value;
+            const contact = document.getElementById("contact").value;
+            const address = document.getElementById("address").value;
+
+            const idPhoto = document.getElementById("idPhoto").files[0] ? 'Y' : 'N';
+            const safetyCertPhoto = document.getElementById("safetyCertPhoto").files[0] ? 'Y' : 'N';
+            const signaturePhoto = document.getElementById("signaturePhoto").files[0] ? 'Y' : 'N';
+
+            const newRow = `
+                <tr>
+                    <td>${name}</td>
+                    <td>${contact}</td>
+                    <td>${address}</td>
+                    <td>${idPhoto}</td>
+                    <td>${safetyCertPhoto}</td>
+                    <td>${signaturePhoto}</td>
+                </tr>
+            `;
+            document.getElementById("personnelList").insertAdjacentHTML('beforeend', newRow);
+            clearForm();
+        }
+
+        function clearForm() {
+            document.getElementById("name").value = '';
+            document.getElementById("contact").value = '';
+            document.getElementById("address").value = '';
+            document.getElementById("idPhoto").value = '';
+            document.getElementById("safetyCertPhoto").value = '';
+            document.getElementById("signaturePhoto").value = '';
+        }
+    </script>
+</body>
+
+</html>

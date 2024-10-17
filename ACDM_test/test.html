@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>성강개발 - 인력사무소</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <header class="header">
+        <h1>(주)성강개발</h1>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h2>성강개발 부산역점</h2>
+            <nav>
+                <ul>
+                    <li><a href="">인력 관리</a></li>
+                    <li><a href="">거래처 관리</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main">
+            <p id="today"></p>
+            <button id="addOutput" onclick="addOutput()">현장 추가</button>
+
+            <section id="outputPage">
+
+                <section class="output">
+                    <label for="client">거래처명:</label>
+                    <select class="client" name="client" onchange="placeSelect(this)">
+                        <option value="clientSelect" selected disabled>거래처를 선택하세요</option>
+                        <option value="client1">원테크</option>
+                        <option value="client2">대양</option>
+                    </select>
+
+                    <label for="place">현장:</label>
+                    <select class="place" name="place" onchange="Count(this)">
+                        <option value="" selected disabled>현장을 선택하세요</option>
+                    </select>
+
+                    <span class="count">총 인원 : 1</span>
+
+                    <div class="outputList"> <!-- people-list -->
+                        <label for="name1">출력 인원:</label>
+                        <input type="text" id="name1" name="name1">
+                    </div>
+                    <button class="addPeople" onclick="addPeople(this)">+ 사람 추가</button>
+
+                    <button class="outputButton" onclick="outPut(this)">출력</button>
+                </section>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        let peopleCount = 1;
+        var output1 = false;
+
+        // 현장 리스트--------------------------------------------------------------------------------------
+        const placePage = {
+            client1: ["미포", "일광", "전포동"],
+            client2: ["사송", "북정동"]
+        };
+
+        // 새 현장 추가--------------------------------------------------------------------------------------
+        function addOutput() {
+            const newOutput = document.getElementById('outputPage');
+            const newSection = document.createElement('div');
+            newSection.classList.add('output'); // 클래스를 추가
+
+            newSection.innerHTML = `
+                <label for="client">거래처명:</label>
+                <select class="client" name="client" onchange="placeSelect(this)">
+                    <option value="clientSelect" selected disabled>거래처를 선택하세요</option>
+                    <option value="client1">원테크</option>
+                    <option value="client2">대양</option>
+                </select>
+
+                <label for="place">현장:</label>
+                <select class="place" name="place" onchange="Count(this)">
+                    <option value="" selected disabled>현장을 선택하세요</option>
+                </select>
+
+                <span class="count">총 인원 : 1</span>
+
+                <div class="outputList"> <!-- people-list -->
+                    <label for="name1">출력 인원:</label>
+                    <input type="text" id="name1" name="name1">
+                </div>
+                <button class="addPeople" onclick="addPeople(this)">+ 사람 추가</button>
+
+                <button class="outputButton" onclick="outPut(this)">출력</button>
+            `;
+            newOutput.appendChild(newSection);
+        }
+
+        // 인원 추가 부분--------------------------------------------------------------------------------------
+        function addPeople(button) {
+            const section = button.closest('.output'); // 현재 섹션 찾기
+            peopleCount++;
+            const peopleDiv = document.createElement('div');
+            peopleDiv.innerHTML = `
+                <label for="name${peopleCount}">사람 이름:</label>
+                <input type="text" id="name${peopleCount}" name="name${peopleCount}">
+            `;
+            section.querySelector('.outputList').appendChild(peopleDiv);
+            Count(section); // 인원 수 업데이트
+        }
+
+        // 총 몇명인지--------------------------------------------------------------------------------------
+        function Count(section) {
+            const total = section.querySelectorAll('.outputList input').length;
+            section.querySelector('.count').textContent = `총 인원 : ${total}`;
+        }
+
+        // 거래처마다 현장 바꾸기--------------------------------------------------------------------------------------
+        function placeSelect(selectElement) {
+            const client = selectElement.value;
+            const placeS = selectElement.closest('.output').querySelector('.place');
+            placeS.innerHTML = '<option value="" selected disabled>현장을 선택하세요</option>'; // 초기화
+
+            if (client && placePage[client]) {
+                placePage[client].forEach(function (place) {
+                    const option = document.createElement('option');
+                    option.value = place;
+                    option.textContent = place;
+                    placeS.appendChild(option);
+                });
+            }
+        }
+
+        // 출력--------------------------------------------------------------------------------------
+       
+        function outPut(button) {
+            const section = button.closest('.output'); // 현재 섹션 찾기
+            const clientS = section.querySelector('.client');
+            const client = clientS.selectedOptions[0]?.textContent; // 안전하게 가져오기
+            const place = section.querySelector('.place').value;
+            const people = Array.from(section.querySelectorAll('.outputList input')).map(input => input.value);
+            const addButton = section.querySelector('.addPeople');
+
+            // 현재 섹션의 상태를 저장하기 위한 변수
+            let isOutputComplete = button.textContent === '출력완료';
+
+            if (!isOutputComplete) {
+                if (client && place && people.length > 0 && people[0]) {
+                    const check = confirm(`거래처명: ${client}\n현장: ${place}\n인원명: ${people.join(', ')}\n\n출력하시겠습니까?`);
+                    if (check) {
+                        button.textContent = '출력완료';
+                        clientS.disabled = true;
+                        section.querySelector('.place').disabled = true;
+                        section.querySelectorAll('.outputList input').forEach(input => input.disabled = true);
+                        addButton.disabled = true; // 사람 추가 버튼 비활성화
+                    }
+                } else {
+                    alert('모든 필드를 채워주세요.');
+                }
+            } 
+            else {
+                // 초기화 로직
+                button.textContent = '출력';
+                clientS.disabled = false;
+                section.querySelector('.place').disabled = false;
+            }
+        }
+        
+        
+        
+        // 오늘 날짜
+        function today() {
+                const today = new Date();
+                const year = today.getFullYear();
+                const month = today.getMonth() + 1;
+                const day = today.getDate();
+                const formattedDate = `${year}.${month < 10 ? '0' + month : month}.${day < 10 ? '0' + day : day}`;
+                document.getElementById('today').textContent = formattedDate;
+            }
+            window.onload = today;
+        
+    </script>
+</body>
+
+</html>

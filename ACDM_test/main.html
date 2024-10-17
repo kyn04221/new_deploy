@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>성강개발 - 인력사무소</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <header class="header">
+        <img src="img/성강로고.jpg" alt="Thumbnail">
+        <h1><a href="main.html">(주)성강개발</a></h1>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h2>성강개발 부산역점</h2>
+            <nav>
+                <ul>
+                    <li><a href="main.html">출력 관리</a></li>
+                    <li><a href="addP.html">인력 관리</a></li>
+                    <li><a href="">거래처 관리</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main">
+            <p id="today"></p>
+            <button id="addOutput" onclick="addOutput()">현장 추가</button>
+
+            <section id="outputPage">
+
+                <section class="output">
+                    <label for="client">거래처명 :</label>
+
+                    <select class="client" name="client" onchange="placeSelect(this)">
+                        <option value="clientSelect" selected disabled>거래처를 선택하세요</option>
+                        <option value="client1">원테크</option>
+                        <option value="client2">대양</option>
+                    </select>
+
+                    <label for="place">현장 :</label>
+
+                    <select class="place" name="place" onchange="Count(this)">
+                        <option value="" selected disabled>현장을 선택하세요</option>
+                    </select>
+
+                    <span class="count">총 인원 : 1</span>
+
+                    <div class="outputList"> 
+                        <label for="name1">출력 인원 :</label>
+                        <input type="text" id="name1" name="name1">
+                    </div>
+                    <button class="addPeople" onclick="addPeople(this)">+ 사람 추가</button>
+
+                    <button class="outputButton" onclick="outPut(this)">출력</button>
+                </section>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        let sectionsPeopleCount = {};
+        var output1 = false;
+
+        // 현장 리스트--------------------------------------------------------------------------------------
+        const placePage = {
+            client1: ["미포", "일광", "전포동"],
+            client2: ["사송", "북정동"]
+        };
+
+        // 새 현장 추가--------------------------------------------------------------------------------------
+       function addOutput() {
+    const newOutput = document.getElementById('outputPage');
+    const newSection = document.createElement('div');
+    newSection.classList.add('output'); // 클래스를 추가
+    const sectionId = `section${Date.now()}`; 
+    sectionsPeopleCount[sectionId] = sectionsPeopleCount[sectionId] || 1; 
+
+    newSection.innerHTML = `
+        <label for="client">거래처명:</label>
+        <select class="client" name="client" onchange="placeSelect(this)">
+            <option value="clientSelect" selected disabled>거래처를 선택하세요</option>
+            <option value="client1">원테크</option>
+            <option value="client2">대양</option>
+        </select>
+
+        <label for="place">현장:</label>
+        <select class="place" name="place" onchange="Count(this)">
+            <option value="" selected disabled>현장을 선택하세요</option>
+        </select>
+
+        <span class="count">총 인원 : ${sectionsPeopleCount[sectionId]}</span>
+
+        <div class="outputList"> <!-- people-list -->
+            <label for="name1">출력 인원:</label>
+            <input type="text" id="name1" name="name1">
+        </div>
+        <button class="addPeople" onclick="addPeople(this, '${sectionId}')">+ 사람 추가</button>
+
+        <button class="outputButton" onclick="outPut(this)">출력</button>
+    `;
+
+    newOutput.appendChild(newSection);
+    Count(newSection, sectionId); 
+}
+
+
+//출력 인원추가
+function addPeople(button, sectionId) {
+    const section = button.closest('.output');
+    const peopleDiv = document.createElement('div');
+    const newInputId = `name${sectionsPeopleCount[sectionId] + 1}`; 
+
+    peopleDiv.innerHTML = `
+        <label for="${newInputId}"></label>
+        <input type="text" id="${newInputId}" name="${newInputId}">
+    `;
+
+    const newInput = peopleDiv.querySelector('input');
+
+    newInput.addEventListener('input', () => {
+        
+        if (newInput.value.trim() !== '' && !newInput.classList.contains('counted')) {
+            sectionsPeopleCount[sectionId]++; 
+            newInput.classList.add('counted'); 
+        }
+       
+        else if (newInput.value.trim() === '' && newInput.classList.contains('counted')) {
+            sectionsPeopleCount[sectionId]--; 
+            newInput.classList.remove('counted'); 
+        }
+        Count(section, sectionId); 
+    });
+
+    
+    section.querySelector('.outputList').appendChild(peopleDiv);
+    Count(section, sectionId); 
+}
+
+// 총 몇명인지 카운트
+function Count(section, sectionId) {
+    // 섹션이 존재하고, 섹션의 카운트가 정의되어 있는지 확인
+    if (sectionId in sectionsPeopleCount) {
+        section.querySelector('.count').textContent = `총 인원: ${sectionsPeopleCount[sectionId]}`;
+    } else {
+        console.error(`Error: sectionId "${sectionId}" is not defined in sectionsPeopleCount.`);
+    }
+}
+
+
+        // 거래처마다 현장 바꾸기--------------------------------------------------------------------------------------
+        function placeSelect(selectElement) {
+            const client = selectElement.value;
+            const placeS = selectElement.closest('.output').querySelector('.place');
+            placeS.innerHTML = '<option value="" selected disabled>현장을 선택하세요</option>'; // 초기화
+
+            if (client && placePage[client]) {
+                placePage[client].forEach(function (place) {
+                    const option = document.createElement('option');
+                    option.value = place;
+                    option.textContent = place;
+                    placeS.appendChild(option);
+                });
+            }
+        }
+
+        // 출력--------------------------------------------------------------------------------------
+        function outPut(button) {
+            const section = button.closest('.output');
+            const clientS = section.querySelector('.client');
+            const client = clientS.value;
+            const place = section.querySelector('.place').value;
+            const people = Array.from(section.querySelectorAll('.outputList input')).map(input => input.value);
+
+            const outputc = section.getAttribute('data-output-complete') === 'true';
+
+            if (!outputc) {
+                if (client && place && people.length > 0 && people[0]) {
+                    const check = confirm(`거래처명: ${client}\n현장: ${place}\n인원명: ${people.join(', ')}\n\n출력하시겠습니까?`);
+                    if (check) {
+
+                        const inputT = section.querySelectorAll('.outputList input');
+                        inputT.forEach(input => {
+                            if (input.value.trim() === '') {
+                                input.parentElement.remove(); // 빈 인풋 필드 제거
+                            }
+                        });
+                        button.textContent = '출력완료';
+                        section.setAttribute('data-output-complete', 'true'); // 상태 업데이트
+                        clientS.disabled = true;
+                        section.querySelector('.place').disabled = true;
+                        section.querySelectorAll('.outputList input').forEach(input => input.disabled = true);
+                        section.querySelector('.addPeople').disabled = true; // 사람 추가 버튼 비활성화
+                    }
+                } else {
+                    alert('모든 필드를 채워주세요.');
+                }
+            } else {
+
+                button.textContent = '출력';
+                section.setAttribute('data-output-complete', 'false'); // 상태 초기화
+                clientS.disabled = false;
+                section.querySelector('.place').disabled = false;
+                section.querySelectorAll('.outputList input').forEach(input => input.disabled = false);
+                section.querySelector('.addPeople').disabled = false; // 사람 추가 버튼 활성화
+            }
+        }
+
+
+
+
+        // 오늘 날짜
+        function today() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = today.getMonth() + 1;
+            const day = today.getDate();
+            const formattedDate = `${year}.${month < 10 ? '0' + month : month}.${day < 10 ? '0' + day : day}`;
+            document.getElementById('today').textContent = formattedDate;
+        }
+        window.onload = today;
+
+    </script>
+</body>
+
+</html>

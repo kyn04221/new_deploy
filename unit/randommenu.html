@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>점심메뉴</title>
+    <link rel="stylesheet" href="../../css/randommenu.css">
+</head>
+
+<body>
+    <header>
+        <h1><a href="../index.html">my mini hompee !</a></h1>
+    </header>
+
+    <div class="container">
+        <nav class="navi">
+            <ul>
+                <li><a href="../index.html">홈</a></li>
+                <!-- <li><a href="#mini">미니실습</a></li> -->
+                <li><a href="../newpost.html">게시글</a></li>
+                <li><a href="../guest">방명록</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <main>
+
+
+
+        <div class="content">
+            <p class="all">랜덤 메뉴 추천 !</p>
+
+            <!-- 게시글 카드들 div -->
+
+
+            <div class="post-item">
+
+                <!-- <h1 id="heading">점심메뉴</h1> -->
+
+                <div id="prod-pic"><!--class="thum"-->
+                    <img src="../../img/은화수식당.jpeg" alt="은화수식당" id="img-pink" data-name="은화수식당" data-price="9,000원"
+                        data-delivery="3,000원" data-point="180원(2%)" data-roast="2019.06.17">
+
+
+                    <div class="samll-pic">
+                        <img src="../../img/은화수식당.jpeg" id="img-pink-small" class="small" data-name="은화수식당"
+                            data-price="9,000원" data-delivery="3,000원" data-point="180원(2%)" data-roast="2019.06.17">
+                        <img src="../../img/은화수식당.jpeg" id="img-blue-small" class="small" data-name="스구식탁"
+                            data-price="8,500원" data-delivery="2,500원" data-point="170원(2%)" data-roast="2019.06.10">
+                        <img src="../../img/은화수식당.jpeg" id="img-gray-small" class="small" data-name="딤딤섬"
+                            data-price="10,000원" data-delivery="3,000원" data-point="200원(2%)" data-roast="2019.06.20">
+                    </div>
+                </div>
+
+                <div id="desc">
+                    <ul id="product-info">
+                        <li>가게 이름 : 스구식탁</li>
+                        <li class="bluetext">판매가 : 9,000원</li>
+                        <li>배송비 : 3,000원<br>(50,000원 이상 구매시 무료)</li>
+                        <li>적립금 : 180원(2%)</li>
+                        <li>로스팅 : 2019.06.17</li>
+                        <button>장바구니 담기</button>
+                    </ul>
+                    <a href="#" id="view">상세 설명 보기</a>
+                </div>
+
+            </div>
+
+
+
+
+            <div id="two">
+                <h1>오늘 내가 먹고싶은 점심메뉴는 ?</h1>
+                <p>점심메뉴를 작성해 보세요</p>
+                <p>하나씩 클릭해서 삭제할 수 있습니다.</p>
+                <form action="">
+                    <input type="text" id="subject" autofocus>
+                    <button onclick="newRegister(); return false;">추가</button>
+                </form>
+                <hr>
+                <ul id="itemList"> </ul>
+            </div>
+
+
+
+        </div><!-- 게시글 카드들 div -->
+
+
+        <div class="sidebar">
+
+            <!--  프로필 아래 구간-->
+            <nav class="category">
+                <ul class="tt_category">
+                    <li class=""><a href="/category" class="link_tit"> 게시글 전체보기 </a>
+                        <ul class="category_list">
+                            <li class><a href="post2.html" class="link_item"> 미니 실습 ! </a>
+                                <ul class="sub_category_list">
+                                    <li class=""><a href="unit/menulist.html" class="link_sub_item"> 점메추 </a></li>
+                                    <li class=""><a href="unit/unit13.html" class="link_sub_item"> 13 단원 </a></li>
+                                    <li class=""><a href="unit/unit12.html" class="link_sub_item"> 12 단원 </a></li>
+                                    <li class=""><a href="unit/unit11.html" class="link_sub_item"> 11 단원 </a></li>
+                                    <li class=""><a href="unit/unit10.html" class="link_sub_item"> 10 단원 </a></li>
+                                    <li class=""><a href="unit/unit9.html" class="link_sub_item"> 9단원 </a></li>
+                                    <li class=""><a href="unit/unit8.html" class="link_sub_item"> 8단원 </a></li>
+                                    <li class=""><a href="unit/unit7.html" class="link_sub_item"> 7 단원 </a></li>
+                                    <li class=""><a href="unit/unit6.html" class="link_sub_item"> 6 단원 </a></li>
+                                    <li class=""><a href="unit/unit5.html" class="link_sub_item"> 5 단원 </a></li>
+                                    <li class=""><a href="unit/unit4.html" class="link_sub_item"> 4 단원 </a></li>
+                                    <li class=""><a href="unit/unit3.html" class="link_sub_item"> 3 단원 </a></li>
+                                    <li class=""><a href="unit/unit1-2.html" class="link_sub_item"> 1~2 단원 </a></li>
+                                </ul>
+                            </li>
+
+                            <li class><a href="/category/Front-End" class="link_item"> 사부작 사부작 </a>
+                                <ul class="sub_category_list">
+                                    <li class=""><a href="test/todo-list.html" class="link_sub_item"> todo list</a>
+                                    </li>
+                                    <li class=""><a href="" class="link_sub_item"> before : minihompee </a></li>
+                                    <li class=""><a href="" class="link_sub_item"> wtudy with us ! </a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </li>
+                </ul>
+
+            </nav>
+
+        </div>
+    </main>
+    <script>
+	// 이미지별 클릭 핸들러를 직접 설정하여 각 id로 참조
+    document.getElementById("img-pink-small").onclick = function () {
+			updateProductInfo("스구식탁", "9,000원", "3,000원", "180원(2%)", "2019.06.17");
+		};
+
+		document.getElementById("img-blue-small").onclick = function () {
+			updateProductInfo("에디오피아 시다모", "8,500원", "2,500원", "170원(2%)", "2019.06.10");
+		};
+
+		document.getElementById("img-gray-small").onclick = function () {
+			updateProductInfo("에디오피아 구지", "10,000원", "3,000원", "200원(2%)", "2019.06.20");
+		};
+
+		// 상품 정보를 업데이트하는 함수
+		function updateProductInfo(name, price, delivery, point, roast) {
+			var productInfo = document.querySelector("#product-info");
+			productInfo.innerHTML = `
+				<li>기게명 : ${name}</li>
+				<li class="bluetext">가격 : ${price}</li>
+				<li>배송비 : ${delivery}<br>(50,000원 이상 구매시 무료)</li>
+				<li>적립금 : ${point}</li>
+				<li>로스팅 : ${roast}</li>
+				<button>장바구니 담기</button>
+			`;
+		}
+
+
+
+/* ---------------------------------------------------------------------------------------------- */
+
+
+        function newRegister() {
+            var newItem = document.createElement("li");  // 요소 노드 추가 
+            var subject = document.querySelector("#subject");  // 폼의 텍스트 필드
+            var newText = document.createTextNode(subject.value);  // 텍스트 필드의 값을 텍스트 노드로 만들기
+            newItem.appendChild(newText);  // 텍스트 노드를 요소 노드의 자식 노드로 추가
+
+            var itemList = document.querySelector("#itemList");  // 웹 문서에서 부모 노드 가져오기 
+            itemList.insertBefore(newItem, itemList.childNodes[0]);  // 자식 노드중 첫번째 노드 앞에 추가
+
+            subject.value = "";
+
+            var items = document.querySelectorAll("li");  // 모든 항목 가져오기
+            for (i = 0; i < items.length; i++) {
+                items[i].addEventListener("click", function () {  // 항목 클릭했을 때 실행할 함수
+                    if (this.parentNode)    // 부모 노드가 있다면 
+                        this.parentNode.removeChild(this);  // 부모 노드에서 삭제
+                });
+            }
+        }
+    </script>
+
+</body>
+
+</html>
